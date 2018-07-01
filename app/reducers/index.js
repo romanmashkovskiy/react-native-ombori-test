@@ -1,10 +1,14 @@
 import {combineReducers} from 'redux';
-import userList from './list-reducer';
+import listReducer from './list-reducer';
+import pageReducer from './current-page-reducer';
+import statusReducer from './status-loading-reducer';
 
 
 
 const rootReducer = combineReducers({
-    userList: userList
+    userList: listReducer,
+    currentPage: pageReducer,
+    loading: statusReducer
 });
 
 export default rootReducer;

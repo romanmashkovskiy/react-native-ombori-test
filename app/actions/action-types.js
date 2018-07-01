@@ -1,1 +1,3 @@
 export const LOAD_DATA_SUCCESS = 'LOAD_DATA_SUCCESS';
+export const LOADING = 'LOADING';
+export const SET_PAGE_NUMBER = 'SET_PAGE_NUMBER';
