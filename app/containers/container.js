@@ -3,18 +3,43 @@ import {bindActionCreators} from 'redux';
 import { connect } from 'react-redux';
 import { StyleSheet, View } from 'react-native';
 import UserList from '../components/user-list';
-import {loadData, setCurrentPage} from "../actions";
+import Pulse from '../components/pulse';
+import {loadData, setCurrentPage, stopAnimationLoading} from "../actions";
 
 
 class Container extends Component {
+    componentDidMount() {
+        //setTimeout(() => {this.props.stopAnimationLoading()}, 3000);
+    }
+
+    renderList() {
+        return (
+            <View style={styles.list}>
+                <UserList
+                    userList={this.props.userList}
+                    loadData={this.props.loadData}
+                    setCurrentPage={this.props.setCurrentPage}
+                    loading={this.props.loading}
+                    currentPage={this.props.currentPage}
+                />
+            </View>
+        )
+    }
+
+    renderLoading() {
+        return (
+            <View style={styles.loading}>
+                <Pulse/>
+            </View>
+
+        )
+
+    }
 
     render() {
-        return (
-            <View style={styles.container}>
-                <UserList userList={this.props.userList} loadData={this.props.loadData} setCurrentPage={this.props.setCurrentPage}
-                loading={this.props.loading} currentPage={this.props.currentPage}/>
-            </View>
-        );
+        if (this.props.animationLoading) return this.renderLoading();
+        return this.renderList();
+
     }
 }
 
@@ -22,20 +47,26 @@ function mapStateToProps (state) {
     return {
         userList: state.userList,
         currentPage: state.currentPage,
-        loading: state.loading
+        loading: state.loading,
+        animationLoading: state.animationLoading
     };
 }
 
 function matchDispatchToProps (dispatch) {
     return bindActionCreators({
         loadData: loadData,
-        setCurrentPage: setCurrentPage
+        setCurrentPage: setCurrentPage,
+        stopAnimationLoading: stopAnimationLoading
         },
         dispatch)
 }
 
 const styles = StyleSheet.create({
-    container: {
+    list: {
+        flex: 1,
+        justifyContent: 'flex-start'
+    },
+    loading: {
         flex: 1,
         justifyContent: 'flex-start'
     }

@@ -56,7 +56,8 @@ class  UserList extends Component {
                         title={`${item.first_name} ${item.last_name}`}
                         avatar={{ uri: item.avatar }}
                         containerStyle={{ borderBottomWidth: 0, height: 150 }}
-                        rightIcon={{name: 'chevron-right'}}
+                        hideChevron
+
                     />
                 )}
                 keyExtractor={item => `${item.id}`}

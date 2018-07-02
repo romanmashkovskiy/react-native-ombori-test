@@ -8,12 +8,11 @@ export function loadData(page) {
                 return response.json();
             })
             .then(response => {
-
                 dispatch(loadDataSuccess(response));
                 dispatch(setState(false));
             }).catch(error => {
                 dispatch(setState(false));
-                throw(error);
+                console.error(error);
             });
     };
 }
@@ -27,5 +26,9 @@ export function setState(state) {
 }
 
 export function setCurrentPage(page) {
-    return {type: types.SET_PAGE_NUMBER, payload: page}
+    return {type: types.SET_PAGE_NUMBER, payload: page};
+}
+
+export function stopAnimationLoading() {
+    return { type: types.STOP_ANIMATION };
 }
