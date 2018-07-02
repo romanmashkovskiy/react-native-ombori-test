@@ -9,7 +9,7 @@ import {loadData, setCurrentPage, stopAnimationLoading} from "../actions";
 
 class Container extends Component {
     componentDidMount() {
-        //setTimeout(() => {this.props.stopAnimationLoading()}, 3000);
+        setTimeout(() => {this.props.stopAnimationLoading()}, 3000);
     }
 
     renderList() {
