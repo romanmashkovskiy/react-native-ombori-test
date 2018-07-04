@@ -1,148 +1,112 @@
 import React, {Component} from 'react';
-import {StyleSheet, View, Animated, Dimensions} from 'react-native';
-
+import { View, Animated } from 'react-native';
 
 class Circle2 extends Component {
-    state = {
-        circle2Opacity: new Animated.Value(0),
-        circle2Height: new Animated.Value(100),
-        circle2Width: new Animated.Value(100),
-        circle2Radius: new Animated.Value(50)
-    };
+    constructor(props) {
+        super(props);
+        this.animatedValue = new Animated.Value(0);
+    }
 
     componentDidMount() {
         this.animate();
     }
 
     animate() {
-        Animated.loop(
-                Animated.parallel([
-                    Animated.timing(
-                        this.state.circle2Opacity,
-                        {
-                            toValue: 0.2,
-                            duration: 2000
-                        }
-                    ),
-                    Animated.timing(
-                        this.state.circle2Height,
-                        {
-                            toValue: 200,
-                            duration: 2000
-                        }
-                    ),
-                    Animated.timing(
-                        this.state.circle2Width,
-                        {
-                            toValue: 200,
-                            duration: 2000
-                        }
-                    ),
-                    Animated.timing(
-                        this.state.circle2Radius,
-                        {
-                            toValue: 100,
-                            duration: 2000
-                        }
-                    ),
-                ])
-          ,
+        this.animatedValue.setValue(0);
+        Animated.timing(
+            this.animatedValue,
             {
-                iterations: 10
+                toValue: 1,
+                duration: 2000
             }
-        )
-       .start()
+        ).start(() => this.animate())
     }
 
     render() {
-        return (
-                <Animated.View
-                    style={{
-                        ...this.props.style,
-                        opacity: this.state.circle2Opacity,
-                        height: this.state.circle2Height,
-                        width: this.state.circle2Width,
-                        borderRadius: this.state.circle2Radius
-                    }}
-                />
-        )
-    }
-}
+        const circle2Opacity = this.animatedValue.interpolate({
+            inputRange: [0 , 1],
+            outputRange: [0, 0.2]
+        });
+        const circle2Height = this.animatedValue.interpolate({
+            inputRange: [0 , 1],
+            outputRange: [100, 200]
+        });
+        const circle2Width = this.animatedValue.interpolate({
+            inputRange: [0 , 1],
+            outputRange: [100, 200]
+        });
+        const circle2Radius = this.animatedValue.interpolate({
+            inputRange: [0 , 1],
+            outputRange: [50, 100]
+        });
 
-class Circle3 extends Component {
-    state = {
-        circle3Opacity: new Animated.Value(0),
-        circle3Height: new Animated.Value(80),
-        circle3Width: new Animated.Value(80),
-        circle3Radius: new Animated.Value(40)
-    };
-
-    componentDidMount() {
-        this.animate();
-    }
-
-    animate() {
-        Animated.loop(
-            Animated.parallel([
-                Animated.timing(
-                    this.state.circle3Opacity,
-                    {
-                        toValue: 0.2,
-                        duration: 2000,
-                        delay: 1000
-
-                    }
-                ),
-                Animated.timing(
-                    this.state.circle3Height,
-                    {
-                        toValue: 200,
-                        duration: 2000,
-                        delay: 1000
-                    }
-                ),
-                Animated.timing(
-                    this.state.circle3Width,
-                    {
-                        toValue: 200,
-                        duration: 2000,
-                        delay: 1000
-                    }
-                ),
-                Animated.timing(
-                    this.state.circle3Radius,
-                    {
-                        toValue: 200,
-                        duration: 2000,
-                        delay: 1000
-                    }
-                ),
-            ])
-            ,
-            {
-                iterations: 10
-            }
-        )
-            .start()
-    }
-
-    render() {
         return (
             <Animated.View
                 style={{
                     ...this.props.style,
-                    opacity: this.state.circle3Opacity,
-                    height: this.state.circle3Height,
-                    width: this.state.circle3Width,
-                    borderRadius: this.state.circle3Radius
+                    opacity: circle2Opacity,
+                    height: circle2Height,
+                    width: circle2Width,
+                    borderRadius: circle2Radius
                 }}
             />
         )
     }
 }
 
+class Circle3 extends Component {
+    constructor(props) {
+        super(props);
+        this.animatedValue = new Animated.Value(0);
+    }
 
+    componentDidMount() {
+        this.animate();
+    }
 
+    animate() {
+        this.animatedValue.setValue(0);
+        Animated.timing(
+            this.animatedValue,
+            {
+                toValue: 1,
+                duration: 2000,
+                delay: 1000
+            }
+        ).start(() => this.animate())
+    }
+
+    render() {
+        const circle3Opacity = this.animatedValue.interpolate({
+            inputRange: [0 , 1],
+            outputRange: [0, 0.2]
+        });
+        const circle3Height = this.animatedValue.interpolate({
+            inputRange: [0 , 1],
+            outputRange: [100, 200]
+        });
+        const circle3Width = this.animatedValue.interpolate({
+            inputRange: [0 , 1],
+            outputRange: [100, 200]
+        });
+        const circle3Radius = this.animatedValue.interpolate({
+            inputRange: [0 , 1],
+            outputRange: [50, 100]
+        });
+
+        return (
+            <Animated.View
+                style={{
+                    ...this.props.style,
+                    opacity: circle3Opacity,
+                    height: circle3Height,
+                    width: circle3Width,
+                    borderRadius: circle3Radius
+                }}
+            />
+        )
+    }
+}
 
 class  Pulse extends Component {
     render() {

@@ -9,6 +9,7 @@ import {loadData, setCurrentPage, stopAnimationLoading} from "../actions";
 
 class Container extends Component {
     componentDidMount() {
+        this.props.loadData(this.props.currentPage);
         setTimeout(() => {this.props.stopAnimationLoading()}, 3000);
     }
 
@@ -37,7 +38,7 @@ class Container extends Component {
     }
 
     render() {
-        if (this.props.animationLoading) return this.renderLoading();
+        if (this.props.animationLoading || this.props.userList.length === 0) return this.renderLoading();
         return this.renderList();
 
     }

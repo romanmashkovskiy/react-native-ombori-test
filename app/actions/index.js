@@ -12,8 +12,8 @@ export function loadData(page) {
                 dispatch(setState(false));
             }).catch(error => {
                 dispatch(setState(false));
-                console.error(error);
-            });
+                console.log(error);
+            })
     };
 }
 

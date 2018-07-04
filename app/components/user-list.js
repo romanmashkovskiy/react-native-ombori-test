@@ -3,9 +3,6 @@ import { View, FlatList, Text, ActivityIndicator } from 'react-native';
 import { List, ListItem } from 'react-native-elements';
 
 class  UserList extends Component {
-    componentDidMount() {
-        this.props.loadData(this.props.currentPage);
-    }
 
     renderSeparator = () => {
         return (
